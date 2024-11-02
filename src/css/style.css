@@ -1,0 +1,300 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--primary_0: #32083d;
+	--primary_1: #631878;
+	--primary_2: #7e2199;
+	--primary_3: #9c29b7;
+	--secondary: #f3f5fb;
+	--white: #ffffff;
+	--grey: #dedee0;
+}
+
+body {
+	font-family: "Noto Sans", sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: "wdth" 100;
+}
+
+header {
+	padding: 1em 2em;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.home-link {
+	font-size: 30px;
+	font-weight: bold;
+	color: var(--primary_1);
+}
+
+.favourites-link {
+	font-weight: bold;
+	color: var(--primary_1);
+}
+
+.page-controls {
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	gap: 1.5em;
+	padding: 1em 3em;
+}
+
+.search-input-container {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	background-color: var(--secondary);
+	border-radius: 6px;
+	overflow: hidden;
+	padding: 0.75em 1em;
+}
+
+.search-input-container .fa-magnifying-glass {
+	color: var(--grey);
+}
+
+.search-input-container input {
+	border: none;
+	outline: none;
+	background-color: transparent;
+}
+
+.sort-preference {
+	padding: 0.5em 1em;
+	background-color: transparent;
+	border: 2px solid var(--grey);
+	border-radius: 6px;
+	outline: none;
+	/* -moz-appearance:none; Remove the default arrow icon in Firefox */
+	/* -webkit-appearance:none; Remove the default arrow icon in Safari and Chrome */
+	/* appearance:none;  */
+	position: relative;
+	display: block;
+}
+
+.sort-preference:after {
+	/* content: url('/svg/caret_down.svg'); */
+	content: "\f078";
+	position: absolute;
+	top: 0;
+	right: 0;
+	/* transform: translateY(-50%); */
+	pointer-events: none;
+}
+
+.call-to-action {
+	padding: 0.5em 1em;
+	background-color: var(--primary_1);
+	border: 2px solid var(--primary_3);
+	color: var(--white);
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	cursor: pointer;
+}
+
+#table-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2em;
+	padding-bottom: 2em;
+}
+
+.main-table {
+	border-spacing: 0;
+	width: 100vw;
+	margin: 1em auto;
+	border-collapse: separate;
+}
+
+.main-table thead {
+	border: none;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+th {
+	padding: 0.5em 1em;
+}
+
+tbody td {
+	text-align: right;
+	display: block;
+}
+
+.game-item td {
+	padding: 0.625em;
+	max-width: 200px; /* Set your desired max-width */
+	white-space: wrap; /* Prevent text wrapping */
+	text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+.game-item.odd {
+	background-color: #eee;
+}
+
+tbody tr {
+	margin: 1em 0;
+	display: block;
+	pointer-events: none;
+}
+
+td::before {
+	/*
+  * aria-label has no advantage, it won't be read inside a table
+  content: attr(aria-label);
+  */
+	content: attr(data-label);
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.details-wrapper {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	column-gap: 1em;
+	opacity: 0;
+	overflow-y: hidden;
+	background-color: var(--secondary);
+	transition:
+		max-height 0.5s ease,
+		opacity 0.5s ease;
+}
+
+.favourite-details-wrapper {
+	display: grid;
+	grid-template-columns: 350px 1fr 350px;
+	column-gap: 1em;
+	overflow-y: hidden;
+	background-color: var(--secondary);
+}
+
+#fetch-more {
+	align-self: center;
+}
+
+.favourites-toggle[data-isFavourite="true"] .fa-heart {
+	color: red;
+}
+
+.favourites-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.favourites-container .warning {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.delete-favourite {
+	background: none;
+}
+
+.delete-favourite .fa-trash {
+	color: red;
+}
+
+@media screen and (min-width: 1000px) {
+	.main-table thead {
+		border: none;
+		clip: unset;
+		height: unset;
+		margin: unset;
+		overflow: unset;
+		padding: unset;
+		position: unset;
+		width: unset;
+	}
+
+	.main-table thead tr {
+		background-color: var(--secondary);
+	}
+
+	.main-table thead th {
+		border-inline: 0.1px solid var(--white);
+	}
+
+	tbody tr {
+		display: table-row;
+		pointer-events: all;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.game-item:hover {
+		background-color: var(--primary_0);
+		color: white;
+	}
+
+	.game-item:hover a {
+		color: white;
+	}
+
+	tbody tr:nth-of-type(even) {
+		background-color: #eee;
+	}
+
+	tbody td {
+		display: table-cell;
+		text-align: left;
+	}
+
+	.game-item td:first-of-type {
+		padding-left: 2em;
+	}
+
+	td::before {
+		display: none;
+	}
+
+	td {
+		padding-block: 0;
+	}
+
+	.game-recommendation-percentage,
+	.game-release-date {
+		text-align: center;
+	}
+
+	.game-details,
+	.details-wrapper {
+		max-height: 0;
+	}
+
+	.game-details td {
+		padding-left: unset;
+	}
+
+	.game-details.show {
+		max-height: 300px;
+		opacity: 1;
+	}
+
+	.game-details.show .details-wrapper {
+		max-height: 300px;
+		opacity: 1;
+		padding: 0.5em 2em;
+	}
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+
+  <script
+    src="./js/index.mjs"
+    type="module"
+    defer
+  ></script>
+  <title>Game Rank || Find your next game here</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a
+        href="/"
+        class="home-link"
+      >Game Rank</a>
+      <a
+        href="/favourites/"
+        class="favourites-link"
+      >Go to favourites</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-controls">
+      Sort By:
+      <select
+        name="sortPreference"
+        id="sortPreference"
+        class="sort-preference"
+      >
+        <option value="by-recommeded">Recommeded</option>
+        <option value="by-release-date">Release Date</option>
+        <option value="by-name">Name</option>
+      </select>
+    </section>
+    <section id="table-section">
+      <table class="main-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Genres</th>
+            <th scope="col">First Released</th>
+            <th scope="col">Platforms</th>
+            <th scope="col">Recommeded (%)</th>
+          </tr>
+        </thead>
+        <tbody
+          class="table-body"
+          id="table-body"
+        >
+
+        </tbody>
+      </table>
+      <button
+        class="call-to-action"
+        id="fetch-more"
+      >Fetch More</button>
+    </section>
+  </main>
+</body>
+
+</html>
