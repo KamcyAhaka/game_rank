@@ -7,18 +7,26 @@ const services = new ExternalServices();
 const favouritesContainer = document.querySelector(".favourites-container");
 
 async function init() {
-	rowListing.renderFavouritesList(favouritesContainer);
+	await rowListing.renderFavouritesList(favouritesContainer);
 
 	const deleteFavouriteBtns = document.querySelectorAll(".delete-favourite");
+	console.log(deleteFavouriteBtns);
 
 	deleteFavouriteBtns.forEach((btn) => {
-		const favouriteId = btn.dataset.gameId;
-		let favourites = getLocalStorage("favourites");
-		if (favourites && favourites.find((item) => item === favouriteId)) {
-			favourites = favourites.filter((item) => item !== favouriteId);
-			setLocalStorage("favourites", favourites);
-			return;
-		}
+		btn.addEventListener("click", async () => {
+			console.log("Clicked");
+			const favouriteId = btn.dataset.gameid;
+			console.log(favouriteId);
+			let favourites = getLocalStorage("favourites");
+			if (favourites && favourites.find((item) => item === favouriteId)) {
+				favourites = favourites.filter((item) => item !== favouriteId);
+				setLocalStorage("favourites", favourites);
+
+				// Remove from DOM and optionally re-render list
+				await rowListing.renderFavouritesList(favouritesContainer);
+				return;
+			}
+		});
 	});
 }
 

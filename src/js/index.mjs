@@ -12,6 +12,17 @@ const sortPreferenceInput = document.querySelector(".sort-preference");
 
 async function init() {
 	await rowListing.init();
+	const preferenceSelectElementOptions = sortPreferenceInput.options;
+	console.log(preferenceSelectElementOptions);
+	const sortPreference = getLocalStorage("sort_preference");
+	if (sortPreference === "by-release-date") {
+		preferenceSelectElementOptions[1];
+	}
+	if (sortPreference === "by-name") {
+		preferenceSelectElementOptions[2];
+	} else {
+		preferenceSelectElementOptions[0];
+	}
 
 	sortPreferenceInput.addEventListener("change", async (event) => {
 		setLocalStorage("sort_preference", event.target.value);
