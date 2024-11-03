@@ -170,7 +170,7 @@ td::before {
 
 .details-wrapper {
 	display: grid;
-	grid-template-columns: auto auto auto;
+	grid-template-columns: auto auto minmax(150px, 350px);
 	column-gap: 1em;
 	opacity: 0;
 	overflow-y: hidden;
@@ -210,10 +210,13 @@ td::before {
 
 .delete-favourite {
 	background: none;
+	border: none;
+	cursor: pointer;
 }
 
 .delete-favourite .fa-trash {
 	color: red;
+	font-size: 20px;
 }
 
 @media screen and (min-width: 1000px) {
@@ -270,7 +273,7 @@ td::before {
 	}
 
 	td {
-		padding-block: 0;
+		/* padding-block: 0; */
 	}
 
 	.game-recommendation-percentage,
@@ -281,6 +284,8 @@ td::before {
 	.game-details,
 	.details-wrapper {
 		max-height: 0;
+		box-sizing: content-box;
+		padding-inline: 2em;
 	}
 
 	.game-details td {
@@ -288,13 +293,23 @@ td::before {
 	}
 
 	.game-details.show {
-		max-height: 300px;
+		max-height: fit-content;
 		opacity: 1;
 	}
 
+	.game__description {
+		max-height: 4.5em; /* Adjust based on line height and desired number of lines */
+		line-height: 1.5em; /* Match line-height to ensure consistent truncation */
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3; /* Limit to 3 lines (adjust as needed) */
+		text-overflow: ellipsis;
+	}
+
 	.game-details.show .details-wrapper {
-		max-height: 300px;
+		max-height: 500px;
 		opacity: 1;
-		padding: 0.5em 2em;
+		padding-block: 0.5em;
 	}
 }

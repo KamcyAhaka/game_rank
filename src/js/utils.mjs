@@ -1,22 +1,6 @@
-// wrapper for querySelector...returns matching element
-export function qs(selector, parent = document) {
-	return parent.querySelector(selector);
-}
 // wrapper for querySelectorAll...returns matching element
 export function qsa(selector, parent = document) {
 	return parent.querySelectorAll(selector);
-}
-// or a more concise version if you are into that sort of thing:
-// export const qs = (selector, parent = document) => parent.querySelector(selector);
-
-export function formDataToJSON(formInputs) {
-	const convertedJSON = {};
-
-	formInputs.forEach((input) => {
-		convertedJSON[input.id] = input.value;
-	});
-
-	return convertedJSON;
 }
 
 // retrieve data from localstorage
@@ -27,15 +11,8 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
 	localStorage.setItem(key, JSON.stringify(data));
 }
-// set a listener for both touchend and click
-export function setClick(selector, callback) {
-	qs(selector).addEventListener("touchend", (event) => {
-		event.preventDefault();
-		callback(event);
-	});
-	qs(selector).addEventListener("click", callback);
-}
 
+// sort games list by preference
 export function sortGames(games, sortPreference) {
 	let sortedGames = [];
 
@@ -53,6 +30,7 @@ export function sortGames(games, sortPreference) {
 	return sortedGames;
 }
 
+// utility function for formating dates
 export function formatDate(dateString) {
 	const date = new Date(dateString);
 
@@ -62,11 +40,4 @@ export function formatDate(dateString) {
 	const year = date.getFullYear();
 
 	return `${day}/${month}/${year}`;
-}
-
-export function getInitials(name) {
-	return name
-		.split(" ")
-		.map((word) => word.charAt(0).toUpperCase())
-		.join("");
 }

@@ -19,12 +19,12 @@ function getPlatforms(data) {
 
 function getDevelopers(data) {
 	const developers = data.Companies.filter((item) => item.type === "DEVELOPER");
-	return developers.map((item) => item.name).join(","); // Join the names into a single string
+	return developers.map((item) => item.name).join(", "); // Join the names into a single string
 }
 
 function getPublishers(data) {
 	const publishers = data.Companies.filter((item) => item.type === "PUBLISHER");
-	return publishers.map((item) => item.name).join(","); // Join the names into a single string
+	return publishers.map((item) => item.name).join(", "); // Join the names into a single string
 }
 
 function getGenres(data) {
@@ -221,7 +221,7 @@ export default class RowListing {
 		});
 	}
 
-	renderFavouritesList(parent, clear = true) {
+	async renderFavouritesList(parent, clear = true) {
 		const favourites = getLocalStorage("favourites");
 
 		if (clear) {
@@ -233,10 +233,15 @@ export default class RowListing {
 			return;
 		}
 
-		favourites.forEach(async (gameId) => {
+		// Map over each favourite to return an array of promises for each render
+		const renderPromises = favourites.map(async (gameId) => {
 			const gameDetails = await services.getGameDetails(gameId);
 			const templateString = createFavouritesTemplate(gameId, gameDetails);
 			parent.insertAdjacentHTML("beforeend", templateString);
+			console.log("Created");
 		});
+
+		// Wait until all render processes complete
+		await Promise.all(renderPromises);
 	}
 }
