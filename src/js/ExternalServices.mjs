@@ -1,8 +1,12 @@
+import { getLocalStorage } from "./utils.mjs";
+
 const apiKey = import.meta.env.VITE_RAPID_API_KEY;
 
 export default class ExternalServices {
-	async getGames(params = undefined) {
+	async getGames(fetchMore = false) {
 		const baseURL = import.meta.env.VITE_OPEN_CRITIC_API_BASEURL;
+
+		let params;
 
 		const options = {
 			method: "GET",
@@ -11,6 +15,11 @@ export default class ExternalServices {
 				"x-rapidapi-host": import.meta.env.VITE_OPEN_CRITIC_API_HOST,
 			},
 		};
+
+		if (fetchMore) {
+			const currentDataCount = getLocalStorage("data").length;
+			params = `skip=${currentDataCount}`;
+		}
 
 		try {
 			const url = params ? `${baseURL}game?${params}` : `${baseURL}game`;
